@@ -1,4 +1,6 @@
 const STORAGE_KEY = 'astraNovaV3';
+const BGM_ENABLED_KEY = 'astraBgmEnabled';
+const SFX_ENABLED_KEY = 'astraSfxEnabled';
 const DEFAULT_STATE = {
   day: 1,
   money: 500,
@@ -38,6 +40,8 @@ let chatTimer = null;
 let scTimer = null;
 let bgmAudio = null;
 let audioContext = null;
+let bgmEnabled = localStorage.getItem(BGM_ENABLED_KEY) !== 'false';
+let sfxEnabled = localStorage.getItem(SFX_ENABLED_KEY) !== 'false';
 const recentChatMessages = [];
 
 function loadState() {
@@ -84,6 +88,20 @@ function loadState() {
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
+
+const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+document.addEventListener('keydown', event => {
+  const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+  if (key !== KONAMI_CODE[konamiIndex]) { konamiIndex = key === KONAMI_CODE[0] ? 1 : 0; return; }
+  if (++konamiIndex !== KONAMI_CODE.length) return;
+  konamiIndex = 0;
+  state.money += 9999;
+  save();
+  updateHeader();
+  render(currentPage);
+  alert('密技啟動！資金 +9999');
+});
 
 function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/g, char => ({
@@ -605,6 +623,7 @@ function ensureAudio() {
 }
 
 function playClickSound() {
+  if (!sfxEnabled) return;
   ensureAudio();
   const oscillator = audioContext.createOscillator();
   const gain = audioContext.createGain();
@@ -619,6 +638,7 @@ function playClickSound() {
 
 function playBgm(type) {
   stopBgm();
+  if (!bgmEnabled) return;
   const file = type === 'game' ? 'game.mp3' : type === 'song' ? 'song.mp3' : 'talk.mp3';
   bgmAudio = new Audio(`audio/${file}`);
   bgmAudio.loop = true;
@@ -633,6 +653,36 @@ function stopBgm() {
   bgmAudio = null;
 }
 
+function updateAudioButtons() {
+  const bgmButton = $('#bgmToggle');
+  const sfxButton = $('#sfxToggle');
+  if (bgmButton) {
+    bgmButton.setAttribute('aria-pressed', String(bgmEnabled));
+    bgmButton.setAttribute('aria-label', bgmEnabled ? '關閉背景音樂' : '開啟背景音樂');
+    bgmButton.title = `背景音樂：${bgmEnabled ? '開啟' : '關閉'}`;
+  }
+  if (sfxButton) {
+    sfxButton.setAttribute('aria-pressed', String(sfxEnabled));
+    sfxButton.setAttribute('aria-label', sfxEnabled ? '關閉音效' : '開啟音效');
+    sfxButton.title = `音效：${sfxEnabled ? '開啟' : '關閉'}`;
+  }
+}
+
+function toggleBgm() {
+  bgmEnabled = !bgmEnabled;
+  localStorage.setItem(BGM_ENABLED_KEY, String(bgmEnabled));
+  if (bgmEnabled && isLive) playBgm(state.liveType);
+  else stopBgm();
+  updateAudioButtons();
+}
+
+function toggleSfx() {
+  sfxEnabled = !sfxEnabled;
+  localStorage.setItem(SFX_ENABLED_KEY, String(sfxEnabled));
+  updateAudioButtons();
+  if (sfxEnabled) playClickSound();
+}
+
 function readImage(file, callback) {
   if (!file) return;
   const reader = new FileReader();
@@ -642,7 +692,9 @@ function readImage(file, callback) {
 
 document.addEventListener('click', event => {
   const button = event.target.closest('button');
-  if (button) playClickSound();
+  if (button && button.id !== 'sfxToggle') playClickSound();
+  if (event.target.closest('#bgmToggle')) return toggleBgm();
+  if (event.target.closest('#sfxToggle')) return toggleSfx();
   const navButton = event.target.closest('[data-p]');
   if (navButton) return render(navButton.dataset.p);
   const startButton = event.target.closest('[data-start]');
@@ -732,4 +784,5 @@ if (!$('[data-p="rules"]')) {
 }
 
 save();
+updateAudioButtons();
 render('info');

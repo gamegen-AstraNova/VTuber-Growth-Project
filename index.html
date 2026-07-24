@@ -24,6 +24,13 @@
     .reset{margin-top:auto;background:none;color:#77778d;font-size:12px}
     .main{width:100%;max-width:1100px;flex:1;margin:auto;padding:34px 48px}
     header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px}
+    .header-tools{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
+    .top-stats{white-space:nowrap}
+    .audio-controls{display:flex;gap:6px}
+    .audio-toggle{width:38px;height:38px;padding:0;display:grid;place-items:center;background:#292b40;font-size:20px;line-height:1}
+    .audio-toggle-icon{filter:grayscale(0) saturate(1.12);opacity:1;transition:filter .2s ease,opacity .2s ease,transform .2s ease}
+    .audio-toggle:hover .audio-toggle-icon{transform:scale(1.08)}
+    .audio-toggle[aria-pressed="false"] .audio-toggle-icon{filter:grayscale(1) saturate(0);opacity:.42}
     .eyebrow{margin:0 0 8px;color:#ff79b7;font-size:11px;letter-spacing:2px}
     #topGoal{color:#a4a3b9;font-size:12px}
     .card{margin-bottom:18px;padding:23px;background:#1d1e2d;border:1px solid #303249;border-radius:17px}
@@ -58,6 +65,9 @@
       .logo span,.mini strong,.mini small,.nav span,.reset{display:none}
       .main{padding:20px 14px}
       header{gap:14px;flex-direction:column}
+      .header-tools{width:100%;justify-content:flex-start}
+      .top-stats{width:100%;white-space:normal;line-height:1.8}
+      .audio-controls{margin-left:auto}
       .grid,.shop{grid-template-columns:1fr}
       .live{flex-direction:column}
       .chat{width:auto;height:150px}
@@ -84,10 +94,22 @@
           <p class="eyebrow">DAY <span id="day">1</span> · VTUBER JOURNEY</p>
           <h1 id="title">Asteria 的頻道</h1>
         </div>
-        <div>
-          💰 <b id="money">500</b>　
-          ⚡ <b id="topEnergy">80%</b>　
-          👥 <b id="topFans">0</b><span id="topGoal"> / 10,000　下次結算剩 6 天</span>
+        <div class="header-tools">
+          <div class="top-stats">
+            💰 <b id="money">500</b>　
+            ⚡ <b id="topEnergy">80%</b>　
+            👥 <b id="topFans">0</b><span id="topGoal"> / 10,000　下次結算剩 6 天</span>
+          </div>
+          <div class="audio-controls">
+            <button class="audio-toggle" id="bgmToggle" type="button"
+              aria-label="關閉背景音樂" aria-pressed="true" title="背景音樂：開啟">
+              <span class="audio-toggle-icon" aria-hidden="true">🎵</span>
+            </button>
+            <button class="audio-toggle" id="sfxToggle" type="button"
+              aria-label="關閉音效" aria-pressed="true" title="音效：開啟">
+              <span class="audio-toggle-icon" aria-hidden="true">🔊</span>
+            </button>
+          </div>
         </div>
       </header>
       <section id="page"></section>
