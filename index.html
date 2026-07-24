@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VTuber Growth Project</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#10111a;color:#f8f7ff;font:14px Arial,"Noto Sans TC",sans-serif}
+    button{border:0;border-radius:9px;padding:11px 15px;background:#292b40;color:#fff;cursor:pointer;font:inherit}
+    button:hover{background:#ff79b7;color:#241626}
+    input{width:100%;padding:10px;background:#292b40;border:1px solid #4a4c65;border-radius:7px;color:#fff}
+    h1{margin:0;font-size:28px}
+    h2{margin:4px 0 8px}
+    .app{display:flex;min-height:100vh}
+    .side{position:sticky;top:0;align-self:flex-start;width:215px;height:100vh;padding:25px 14px;display:flex;flex-direction:column;overflow-y:auto;background:#171821;border-right:1px solid #2c2d3c}
+    .logo{margin:0 10px 36px;font-weight:bold;letter-spacing:2px}
+    .logo i{color:#ff79b7;font-size:25px;font-style:normal}
+    .mini{margin-bottom:25px;padding:12px;background:#242536;border-radius:12px}
+    .mini strong{display:block}
+    .mini small,.muted,.stat small,.item small{color:#9999ad}
+    .nav{display:block;width:100%;margin:4px 0;text-align:left;background:transparent;color:#a4a3b9}
+    .nav.active{background:#2c2e44;color:#fff;border-left:3px solid #ff79b7}
+    .reset{margin-top:auto;background:none;color:#77778d;font-size:12px}
+    .main{width:100%;max-width:1100px;flex:1;margin:auto;padding:34px 48px}
+    header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px}
+    .eyebrow{margin:0 0 8px;color:#ff79b7;font-size:11px;letter-spacing:2px}
+    #topGoal{color:#a4a3b9;font-size:12px}
+    .card{margin-bottom:18px;padding:23px;background:#1d1e2d;border:1px solid #303249;border-radius:17px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .stats{display:flex;gap:10px;flex-wrap:wrap}
+    .stat{min-width:110px;flex:1;padding:13px;background:#292b40;border-radius:10px}
+    .stat b{display:block;margin-top:5px;font-size:21px}
+    .portrait{position:relative;display:grid;place-items:center;overflow:hidden;background:#2e315f center bottom/contain no-repeat;border-radius:13px}
+    .triangle{position:relative;width:250px;height:210px;margin:5px auto}
+    .triangle:before{content:"";position:absolute;inset:10px 20px;background:#ff79b722;clip-path:polygon(50% 0,100% 100%,0 100%);border:1px solid #ff79b7}
+    .triangle span{position:absolute;font-size:12px}
+    .triangle .t{top:0;left:105px}
+    .triangle .l{bottom:0;left:6px}
+    .triangle .r{right:0;bottom:0}
+    .shop{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .item{text-align:left}
+    .item small{display:block;margin:7px 0}
+    .live{display:flex;gap:18px;min-height:460px;padding:20px;background:#090a10;border-radius:13px}
+    .stage{position:relative;flex:1;overflow:hidden;background:#111321;border-radius:10px}
+    .spark{position:absolute;z-index:3;color:#8ae8ff;animation:blink 1.7s infinite}
+    .s1{top:16%;left:18%}
+    .s2{top:30%;right:20%}
+    .s3{bottom:25%;left:12%}
+    .chat{width:220px;padding:13px;overflow:auto;background:#151622;border-radius:9px}
+    .chat p{margin:0 0 13px;font-size:12px}
+    .chat b{color:#73e6df}
+    .video{min-height:170px;padding:8px;background:#282a3d;border-radius:10px}
+    .thumb{width:100%;height:105px;margin-bottom:8px;background:#34376b center bottom/contain no-repeat;border-radius:7px}
+    @keyframes blink{50%{opacity:.25;transform:scale(1.5)}}
+    @media(max-width:780px){
+      .side{width:64px;padding:15px 7px}
+      .logo span,.mini strong,.mini small,.nav span,.reset{display:none}
+      .main{padding:20px 14px}
+      header{gap:14px;flex-direction:column}
+      .grid,.shop{grid-template-columns:1fr}
+      .live{flex-direction:column}
+      .chat{width:auto;height:150px}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="logo"><i>✦</i> <span>ASTRANOVA<br>STUDIO</span></div>
+      <div class="mini"><strong id="sideName">Asteria</strong><small>VTuber Creator</small></div>
+      <nav>
+        <button class="nav active" data-p="info">▦　<span>資訊</span></button>
+        <button class="nav" data-p="live">◉　<span>直播</span></button>
+        <button class="nav" data-p="upgrade">♢　<span>強化</span></button>
+        <button class="nav" data-p="work">◌　<span>打工</span></button>
+        <button class="nav" data-p="rest">☾　<span>休息</span></button>
+      </nav>
+      <button class="reset" id="reset">重置進度</button>
+    </aside>
+    <main class="main">
+      <header>
+        <div>
+          <p class="eyebrow">DAY <span id="day">1</span> · VTUBER JOURNEY</p>
+          <h1 id="title">Asteria 的頻道</h1>
+        </div>
+        <div>
+          💰 <b id="money">500</b>　
+          ⚡ <b id="topEnergy">80%</b>　
+          👥 <b id="topFans">0</b><span id="topGoal"> / 10,000　下次結算剩 6 天</span>
+        </div>
+      </header>
+      <section id="page"></section>
+    </main>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
