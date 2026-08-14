@@ -63,7 +63,109 @@
     .chat b{color:#73e6df}
     .video{min-height:170px;padding:8px;background:#282a3d;border-radius:10px}
     .thumb{width:100%;height:105px;margin-bottom:8px;background:#34376b center bottom/contain no-repeat;border-radius:7px}
-    @keyframes blink{50%{opacity:.25;transform:scale(1.5)}}
+
+/* Mobile secret-code pad */
+.touch-konami-pad {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(4, 8, 20, .76);
+  font-family: system-ui, sans-serif;
+  touch-action: manipulation;
+}
+.touch-konami-panel {
+  position: relative;
+  box-sizing: border-box;
+  width: min(360px, calc(100vw - 36px));
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 24px;
+  background: linear-gradient(145deg, #17233d, #0b1121);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .48);
+  color: #fff;
+}
+.touch-konami-title {
+  color: #9eeaff;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .22em;
+  text-align: center;
+}
+.touch-konami-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .09);
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+}
+.touch-konami-progress {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 16px 0 18px;
+}
+.touch-konami-progress i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .2);
+}
+.touch-konami-progress i.on {
+  background: #63e6ff;
+  box-shadow: 0 0 10px #63e6ff;
+}
+.touch-konami-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 7vw, 28px);
+}
+.touch-konami-dpad {
+  display: grid;
+  grid-template: repeat(3, 54px) / repeat(3, 54px);
+}
+.touch-konami-key {
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 16px;
+  background: #253657;
+  box-shadow: inset 0 -4px rgba(0, 0, 0, .22);
+  color: #fff;
+  font: 900 22px/1 system-ui;
+  cursor: pointer;
+}
+.touch-konami-key:active {
+  transform: translateY(2px);
+  background: #334a73;
+  box-shadow: none;
+}
+.touch-konami-up { grid-area: 1 / 2; }
+.touch-konami-left { grid-area: 2 / 1; }
+.touch-konami-down { grid-area: 2 / 2; }
+.touch-konami-right { grid-area: 2 / 3; }
+.touch-konami-ab {
+  display: flex;
+  gap: 10px;
+  transform: rotate(-12deg);
+}
+.touch-konami-ab .touch-konami-key {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #d44971;
+}
+.touch-konami-ab .touch-konami-key:last-child { background: #3ea7df; }
++    @keyframes blink{50%{opacity:.25;transform:scale(1.5)}}
     @media(max-width:780px){
       .side{width:64px;padding:15px 7px}
       .logo span,.mini strong,.mini small,.nav span,.reset{display:none}
@@ -123,7 +225,7 @@
       <section id="page"></section>
     </main>
   </div>
-  <script src="game.js"></script>
+  <script src="game.js?v=3"></script>
   <script src="language-packs.js?v=1"></script>
   <script src="i18n.js?v=1"></script>
 </body>
