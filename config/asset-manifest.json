@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "assets": [
+    {
+      "id": "bgm_stream_game_loop",
+      "type": "audio",
+      "relativePath": "audio/bgm_stream_game_loop.mp3",
+      "cssVariable": null
+    },
+    {
+      "id": "bgm_stream_song_loop",
+      "type": "audio",
+      "relativePath": "audio/bgm_stream_song_loop.mp3",
+      "cssVariable": null
+    },
+    {
+      "id": "bgm_stream_talk_loop",
+      "type": "audio",
+      "relativePath": "audio/bgm_stream_talk_loop.mp3",
+      "cssVariable": null
+    },
+    {
+      "id": "logo_favicon",
+      "type": "image",
+      "relativePath": "textures/logo_favicon.svg",
+      "cssVariable": null
+    },
+    {
+      "id": "bg_stream_game",
+      "type": "image",
+      "relativePath": "textures/bg_stream_game.png",
+      "cssVariable": null
+    },
+    {
+      "id": "bg_stream_song",
+      "type": "image",
+      "relativePath": "textures/bg_stream_song.png",
+      "cssVariable": null
+    },
+    {
+      "id": "bg_stream_talk",
+      "type": "image",
+      "relativePath": "textures/bg_stream_talk.png",
+      "cssVariable": null
+    },
+    {
+      "id": "deco_asteria_idle",
+      "type": "image",
+      "relativePath": "textures/deco_asteria_idle.png",
+      "cssVariable": null
+    }
+  ]
+}
