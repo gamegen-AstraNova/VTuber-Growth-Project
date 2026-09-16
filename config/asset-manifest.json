@@ -28,25 +28,25 @@
     {
       "id": "bg_stream_game",
       "type": "image",
-      "relativePath": "textures/bg_stream_game.png",
+      "relativePath": "textures/bg_stream_game.webp",
       "cssVariable": null
     },
     {
       "id": "bg_stream_song",
       "type": "image",
-      "relativePath": "textures/bg_stream_song.png",
+      "relativePath": "textures/bg_stream_song.webp",
       "cssVariable": null
     },
     {
       "id": "bg_stream_talk",
       "type": "image",
-      "relativePath": "textures/bg_stream_talk.png",
+      "relativePath": "textures/bg_stream_talk.webp",
       "cssVariable": null
     },
     {
       "id": "deco_asteria_idle",
       "type": "image",
-      "relativePath": "textures/deco_asteria_idle.png",
+      "relativePath": "textures/deco_asteria_idle.webp",
       "cssVariable": null
     }
   ]
